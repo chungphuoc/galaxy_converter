@@ -1,3 +1,7 @@
+require "galaxy_converter/metal"
+require "galaxy_converter/rule"
+require "galaxy_converter/unit"
+
 module GalaxyConverter
   class Calculator
     def initialize(units, metal, rule = Rule)
