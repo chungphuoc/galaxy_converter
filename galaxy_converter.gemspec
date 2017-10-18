@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.authors = ["costajob"]
   s.email = ["costajob@gmail.com"]
   s.summary = "Arabic numerals to galaxy units converter, aimed to help on intergalactic transactions."
-  s.files = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(spec|test|s|features)/}) }
+  s.files = %w(README.md Rakefile bin/galaxy_converter) + Dir["{spec,lib}/**/*.{rb,RB}"]
   s.bindir = "bin"
   s.executables << "galaxy_converter"
   s.require_paths = ["lib"]
