@@ -1,12 +1,12 @@
+require "galaxy_converter/metal"
+
 module GalaxyConverter
   class Question
     PREFIXES = ["how much is ", "how many credits is "]
     MARK = "?"
 
     def self.bulk(questions)
-      Array(questions).map do |body|
-        new(body)
-      end
+      Array(questions).map { |body| new(body) }
     end
 
     def initialize(body)
@@ -28,7 +28,7 @@ module GalaxyConverter
 
     def metal
       return unless @body.start_with?(PREFIXES.last)
-      tokens.last
+      Metal.new(tokens.last)
     end
 
     private def stripped

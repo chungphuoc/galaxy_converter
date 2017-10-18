@@ -14,6 +14,10 @@ module GalaxyConverter
       METAL_VALUES.fetch(@name, 0)
     end
 
+    def to_s
+      @name.capitalize
+    end
+
     def *(n)
       n.to_i * credits
     end

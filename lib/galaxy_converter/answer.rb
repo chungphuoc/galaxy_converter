@@ -23,7 +23,7 @@ module GalaxyConverter
     end
 
     private def stuff
-      "#{@units} #{@metal.to_s.capitalize}".strip
+      "#{@units} #{@metal}".strip
     end
 
     private def value

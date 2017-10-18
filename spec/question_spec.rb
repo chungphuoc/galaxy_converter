@@ -34,6 +34,6 @@ describe GalaxyConverter::Question do
   it "must extract units and metal" do
     question = GalaxyConverter::Question.new("how many Credits is glob prok Platinum  ?")
     question.units.must_equal "glob prok"
-    question.metal.must_equal "platinum"
+    question.metal.to_s.must_equal "Platinum"
   end
 end

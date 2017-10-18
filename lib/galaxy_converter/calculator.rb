@@ -1,18 +1,17 @@
-require "galaxy_converter/metal"
 require "galaxy_converter/rule"
 require "galaxy_converter/unit"
 
 module GalaxyConverter
   class Calculator
-    def initialize(units, metal = nil, rule = Rule)
+    def initialize(units, value = nil, rule = Rule)
       @units = units
-      @metal = metal
+      @value = value
       @rule = rule
     end
 
     def call
-      return total unless @metal
-      Metal.new(@metal) * total
+      return total unless @value
+      @value * total
     end
 
     private def total

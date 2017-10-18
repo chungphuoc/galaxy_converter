@@ -40,4 +40,9 @@ describe GalaxyConverter::Metal do
     metal = GalaxyConverter::Metal.new("iron")
     (metal * "doh!").must_equal 0
   end
+
+  it "must be respresented as a string" do
+    metal = GalaxyConverter::Metal.new("iron")
+    metal.to_s.must_equal "Iron"
+  end
 end
