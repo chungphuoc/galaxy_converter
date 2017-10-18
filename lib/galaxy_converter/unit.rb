@@ -7,6 +7,10 @@ module GalaxyConverter
       "glob" => 1
     }
 
+    def self.bulk(units)
+      units.split(" ").map { |name| new(name) }
+    end
+
     def initialize(name)
       @name = name
     end
