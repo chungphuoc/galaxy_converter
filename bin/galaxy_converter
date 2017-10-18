@@ -6,4 +6,4 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "galaxy_converter"
 
 input = ARGV.fetch(0, "")
-GalaxyConverter::CLI.new(input).puts
+GalaxyConverter::CLI.new(input).call

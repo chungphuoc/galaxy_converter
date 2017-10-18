@@ -5,13 +5,13 @@ describe GalaxyConverter::CLI do
 
   it "must print help" do
     cli = GalaxyConverter::CLI.new("-h", output)
-    cli.puts
+    cli.call
     output.string.must_equal "Usage: galaxy_converter <input>\n    -h --help               Print this help\n    \"how much is pish?\"     Answer the question\n    ~/questions.txt         Load questions file\n"
   end
 
   it "must print single answer" do
     cli = GalaxyConverter::CLI.new("how much is pish tegj glob glob ?", output)
-    cli.puts
+    cli.call
     output.string.must_equal "pish tegj glob glob is 42\n"
   end
 
@@ -33,7 +33,7 @@ describe GalaxyConverter::CLI do
     end
 
     cli = GalaxyConverter::CLI.new(input.path, output)
-    cli.puts
+    cli.call
     output.string.must_equal "pish tegj glob glob is 42\nglob prok Silver is 68 Credits\nglob prok Gold is 57800 Credits\nglob prok Iron is 782 Credits\nI have no idea what you are talking about\n"
   end
 end

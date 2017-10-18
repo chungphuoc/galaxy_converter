@@ -6,13 +6,13 @@ module GalaxyConverter
     HELP_FLAGS = %w[-h --help]
     COL_WIDTH = 23
 
-    def initialize(input, output = STDOUT)
+    def initialize(input, io = STDOUT)
       @input = input
-      @output = output
+      @io = io
     end
 
-    def puts
-      @output.puts answers
+    def call
+      @io.puts output
     end
 
     private def file?
@@ -38,7 +38,7 @@ module GalaxyConverter
       Question::bulk(data)
     end
 
-    private def answers
+    private def output
       return help if help?
       questions.map { |question| Answer.new(question).to_s }.reject(&:empty?)
     end
