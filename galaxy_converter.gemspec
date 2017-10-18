@@ -9,6 +9,8 @@ Gem::Specification.new do |s|
   s.version = GalaxyConverter::VERSION
   s.authors = ["costajob"]
   s.email = ["costajob@gmail.com"]
+  s.homepage = "https://bitbucket.org/costajob/galaxy_converter"
+  s.license = "MIT"
   s.summary = "Arabic numerals to galaxy units converter, aimed to help on intergalactic transactions."
   s.files = %w(README.md Rakefile bin/galaxy_converter) + Dir["{spec,lib}/**/*.{rb,RB}"]
   s.bindir = "bin"
