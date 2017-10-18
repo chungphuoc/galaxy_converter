@@ -15,7 +15,7 @@ module GalaxyConverter
     end
 
     private def file?
-      File.exist?(File.expand_path(@input))
+      File.file?(File.expand_path(@input))
     end
 
     private def help?
