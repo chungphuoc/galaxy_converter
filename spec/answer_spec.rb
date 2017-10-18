@@ -1,6 +1,12 @@
 require "helper"
 
 describe GalaxyConverter::Answer do
+  it "must answer none" do
+    question = GalaxyConverter::Question.new("tegj is L")
+    answer = GalaxyConverter::Answer.new(question)
+    answer.to_s.must_be_nil
+  end
+
   it "must answer with unknown for invalid questions" do
     question = GalaxyConverter::Question.new("how much wood could a woodchuck chuck if a woodchuck could chuck wood ?")
     answer = GalaxyConverter::Answer.new(question)

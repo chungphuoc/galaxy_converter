@@ -1,14 +1,8 @@
-## Table of Contents
-
+# Table of Contents
 * [Scope](#scope)
 * [Design](#design)
-  * [SRP](#srp)
-  * [Roman numerals](#roman-numerals)
-  * [Invalid inputs](#invalid-inputs)
 * [Installation](#installation)
 * [Usage](#usage)
-  * [CLI](#cli)
-  * [Tests](#tests)
 
 # Scope
 This gem is the Ruby implementation of the `Merchant's Guide to the Galaxy` code-kata.
@@ -55,6 +49,40 @@ galaxy_converter "how much is pish tegj glob glob ?"
 And manage unknown answer as well:
 ```shell
 galaxy_converter "how much wood could a woodchuck chuck if a woodchuck could chuck wood ?"
+> I have no idea what you are talking about
+```
+
+There is no answer if no question is posted:
+```shell
+galaxy_converter "glob is I"
+>
+```
+
+### Load file
+In case you have sketched your questions on a file like this:
+```txt
+# ~/notebook.txt
+glob is I
+prok is V
+pish is X
+tegj is L
+glob glob Silver is 34 Credits
+glob prok Gold is 57800 Credits
+pish pish Iron is 3910 Credits
+how much is pish tegj glob glob ?
+how many Credits is glob prok Silver ?
+how many Credits is glob prok Gold ?
+how many Credits is glob prok Iron ?
+how much wood could a woodchuck chuck if a woodchuck could chuck wood ?
+```
+
+You can post it by simply specifying the path:
+```shell
+galaxy_converter ~/notebook.txt
+> pish tegj glob glob is 42
+> glob prok Silver is 68 Credits
+> glob prok Gold is 57800 Credits
+> glob prok Iron is 782 Credits
 > I have no idea what you are talking about
 ```
 

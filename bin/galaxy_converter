@@ -5,7 +5,5 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require "galaxy_converter"
 
-body = ARGV.fetch(0, "")
-question = GalaxyConverter::Question.new(body)
-answer = GalaxyConverter::Answer.new(question)
-puts answer
+input = ARGV.fetch(0, "")
+GalaxyConverter::CLI.new(input).puts

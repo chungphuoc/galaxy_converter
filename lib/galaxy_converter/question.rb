@@ -3,12 +3,22 @@ module GalaxyConverter
     PREFIXES = ["how much is ", "how many credits is "]
     MARK = "?"
 
+    def self.bulk(questions)
+      Array(questions).map do |body|
+        new(body)
+      end
+    end
+
     def initialize(body)
       @body = body.downcase
     end
 
     def valid?
-      PREFIXES.any? { |prefix| @body.start_with?(prefix) }
+      PREFIXES.any? { |prefix| @body.start_with?(prefix) } && mark?
+    end
+
+    def mark?
+      @body.end_with?(MARK)
     end
 
     def units

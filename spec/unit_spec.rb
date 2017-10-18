@@ -1,7 +1,7 @@
 require "helper"
 
 describe GalaxyConverter::Unit do
-  it "must create bulk units instances" do
+  it "must create instances in bulk" do
     GalaxyConverter::Unit.bulk("pish tegj glob pish").each do |unit|
       unit.must_be_instance_of GalaxyConverter::Unit
     end

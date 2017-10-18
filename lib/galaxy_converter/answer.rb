@@ -13,6 +13,7 @@ module GalaxyConverter
     end
 
     def to_s
+      return unless @question.mark?
       return UNKNOWN unless @question.valid?
       "#{stuff} #{value}"
     end
