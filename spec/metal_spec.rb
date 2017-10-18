@@ -1,39 +1,14 @@
 require "helper"
 
 describe GalaxyConverter::Metal do
-  it "must compute value of nil" do
-    metal = GalaxyConverter::Metal.new(nil)
-    metal.credits.must_equal 0
-  end
-
-  it "must fetch value of Silver" do
-    metal = GalaxyConverter::Metal.new("Silver")
-    metal.credits.must_equal 17
-  end
-
-  it "must fetch value of Iron" do
-    metal = GalaxyConverter::Metal.new("Iron")
-    metal.credits.must_equal 195.5
-  end
-
-  it "must fetch value of Gold" do
-    metal = GalaxyConverter::Metal.new("Gold")
-    metal.credits.must_equal 14450
-  end
-
-  it "must relax on capitalization" do
+  it "must be respresented as a string" do
     metal = GalaxyConverter::Metal.new("iron")
-    metal.credits.must_equal 195.5
+    metal.to_s.must_equal "Iron"
   end
 
-  it "must relax on case" do
-    metal = GalaxyConverter::Metal.new("SILVER")
-    metal.credits.must_equal 17
-  end
-
-  it "must dicard valueless metals" do
-    metal = GalaxyConverter::Metal.new("platinum")
-    metal.credits.must_equal 0
+  it "must detect nil value" do
+    metal = GalaxyConverter::Metal.new(nil)
+    metal.must_be_nil
   end
 
   it "must support multiplication" do
@@ -46,8 +21,8 @@ describe GalaxyConverter::Metal do
     (metal * "doh!").must_equal 0
   end
 
-  it "must be respresented as a string" do
-    metal = GalaxyConverter::Metal.new("iron")
-    metal.to_s.must_equal "Iron"
+  it "must relax on invalid metal" do
+    metal = GalaxyConverter::Metal.new(nil)
+    (metal * "doh!").must_equal 0
   end
 end

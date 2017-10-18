@@ -4,7 +4,7 @@ describe GalaxyConverter::Answer do
   it "must answer none" do
     question = GalaxyConverter::Question.new("tegj is L")
     answer = GalaxyConverter::Answer.new(question)
-    answer.to_s.must_be_nil
+    answer.to_s.must_be_empty
   end
 
   it "must answer with unknown for invalid questions" do

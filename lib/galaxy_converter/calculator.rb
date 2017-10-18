@@ -10,7 +10,7 @@ module GalaxyConverter
     end
 
     def call
-      return total unless @value
+      return total if @value.nil?
       @value * total
     end
 

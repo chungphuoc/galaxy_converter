@@ -1,33 +1,34 @@
 require "galaxy_converter/calculator"
+require "galaxy_converter/metal"
 require "galaxy_converter/question"
 
 module GalaxyConverter
   class Answer
     UNKNOWN = "I have no idea what you are talking about"
 
-    def initialize(question, calculator = Calculator)
+    def initialize(question, calculator = Calculator, metal = Metal)
       @question = question
       @units = question.units
-      @metal = question.metal
-      @calculator = calculator
+      @value = metal.new(question.value)
+      @calculator = calculator.new(@units, @value)
     end
 
     def to_s
-      return unless @question.mark?
+      return "" unless @question.mark?
       return UNKNOWN unless @question.valid?
       "#{stuff} #{value}"
     end
 
     private def compute
-      "%g" % @calculator.new(@units, @metal).call
+      "%g" % @calculator.call
     end
 
     private def stuff
-      "#{@units} #{@metal}".strip
+      "#{@units} #{@value}".strip
     end
 
     private def value
-      return "is #{compute}" unless @metal
+      return "is #{compute}" if @value.nil?
       "is #{compute} Credits"
     end
   end

@@ -39,7 +39,7 @@ module GalaxyConverter
 
     private def answers
       return help if help?
-      questions.map { |question| Answer.new(question).to_s }.compact
+      questions.map { |question| Answer.new(question).to_s }.reject(&:empty?)
     end
   end
 end

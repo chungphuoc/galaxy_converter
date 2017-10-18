@@ -10,16 +10,20 @@ module GalaxyConverter
       @name = name.to_s.downcase
     end
 
-    def credits
-      VALUES.fetch(@name, 0)
-    end
-
     def to_s
       @name.capitalize
     end
 
+    def nil?
+      @name.strip.empty?
+    end
+
     def *(n)
-      n.to_i * credits
+      n.to_i * value
+    end
+
+    private def value
+      VALUES.fetch(@name, 0)
     end
   end
 end

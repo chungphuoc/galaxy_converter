@@ -1,5 +1,3 @@
-require "galaxy_converter/metal"
-
 module GalaxyConverter
   class Question
     PREFIXES = ["how much is ", "how many credits is "]
@@ -27,9 +25,9 @@ module GalaxyConverter
       tokens.first(tokens.size - 1).join(" ")
     end
 
-    def metal
+    def value
       return unless @body.start_with?(PREFIXES.last)
-      Metal.new(tokens.last)
+      tokens.last
     end
 
     private def tokens

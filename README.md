@@ -26,7 +26,7 @@ It is also more compliant to the `ruby-way` of coding.
 # Installation
 Once you've got the gem, just move to the download folder and install it locally by:
 ```shell
-gem install --local ./galaxy_converter-1.2.0.gem
+gem install --local ./galaxy_converter-1.2.1.gem
 ```
 
 # Usage

@@ -28,18 +28,18 @@ describe GalaxyConverter::Question do
   it "must exit early for empty string" do
     question = GalaxyConverter::Question.new("")
     question.units.must_be_nil
-    question.metal.must_be_nil
+    question.value.must_be_nil
   end
 
   it "must extract units" do
     question = GalaxyConverter::Question.new("How much is pish tegj glob glob trish ?")
     question.units.must_equal "pish tegj glob glob trish"
-    question.metal.must_be_nil
+    question.value.must_be_nil
   end
 
-  it "must extract units and metal" do
+  it "must extract units and value" do
     question = GalaxyConverter::Question.new("how many Credits is glob prok Platinum  ?")
     question.units.must_equal "glob prok"
-    question.metal.to_s.must_equal "Platinum"
+    question.value.must_equal "platinum"
   end
 end
