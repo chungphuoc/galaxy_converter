@@ -1,6 +1,11 @@
 require "helper"
 
 describe GalaxyConverter::Calculator do
+  it "must compute a total of 42" do
+    calculator = GalaxyConverter::Calculator.new("pish tegj glob glob")
+    calculator.call.must_equal 42
+  end
+
   it "must compute 34 credits" do
     calculator = GalaxyConverter::Calculator.new("glob glob", "Silver")
     calculator.call.must_equal 34

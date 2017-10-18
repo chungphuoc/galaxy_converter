@@ -9,7 +9,7 @@ describe GalaxyConverter::Question do
   end
 
   it "must detect invalid question" do
-    question = GalaxyConverter::Question.new("how much wood could a woodchuck chuck if a woodchuck could chuck wood ?")
+    question = GalaxyConverter::Question.new("how much?")
     question.valid?.must_equal false
   end
 

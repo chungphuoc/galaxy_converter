@@ -4,17 +4,18 @@ require "galaxy_converter/unit"
 
 module GalaxyConverter
   class Calculator
-    def initialize(units, metal, rule = Rule)
+    def initialize(units, metal = nil, rule = Rule)
       @units = units
-      @metal = Metal.new(metal)
+      @metal = metal
       @rule = rule
     end
 
     def call
-      @metal * total_units
+      return total unless @metal
+      Metal.new(@metal) * total
     end
 
-    private def total_units
+    private def total
       Unit.bulk(additive).reduce(0) do |total, unit|
         total += unit.to_i
       end
