@@ -3,6 +3,12 @@ require "helper"
 describe GalaxyConverter::CLI do
   let(:output) { StringIO.new }
 
+  it "must print help" do
+    cli = GalaxyConverter::CLI.new("-h", output)
+    cli.puts
+    output.string.must_equal "Usage: galaxy_converter <input>\n    -h --help               Print this help\n    \"how much is pish?\"     Answer the question\n    ~/questions.txt         Load questions file\n"
+  end
+
   it "must print single answer" do
     cli = GalaxyConverter::CLI.new("how much is pish tegj glob glob ?", output)
     cli.puts
