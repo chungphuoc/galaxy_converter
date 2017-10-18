@@ -1,4 +1,5 @@
 require "galaxy_converter/answer"
+require "galaxy_converter/question"
 
 module GalaxyConverter
   class CLI

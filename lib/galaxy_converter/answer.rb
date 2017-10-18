@@ -1,6 +1,5 @@
 require "galaxy_converter/calculator"
 require "galaxy_converter/metal"
-require "galaxy_converter/question"
 
 module GalaxyConverter
   class Answer
