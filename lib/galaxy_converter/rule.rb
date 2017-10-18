@@ -3,9 +3,9 @@ module GalaxyConverter
     extend self
 
     LONG_TO_SHORT = {
-      "pish pish pish pish"  => "pish tegj",
-      "prok glob glob glob glob" => "glob pish",
-      "glob glob glob glob"  => "glob prok"
+      "pish pish pish pish"  => "pish tegj",     # 40
+      "prok glob glob glob glob" => "glob pish", # 9
+      "glob glob glob glob"  => "glob prok"      # 4
     }
 
     def call(units)
