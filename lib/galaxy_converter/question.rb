@@ -10,7 +10,7 @@ module GalaxyConverter
     end
 
     def initialize(body)
-      @body = body.downcase
+      @body = body.to_s.downcase
     end
 
     def valid?
@@ -32,12 +32,12 @@ module GalaxyConverter
       Metal.new(tokens.last)
     end
 
-    private def stripped
-      @stripped ||= @body.sub(/#{PREFIXES.join("|")}/, "").sub(MARK, "").strip
+    private def tokens
+      stripped.split(" ")
     end
 
-    private def tokens
-      @tokens ||= stripped.split(" ")
+    private def stripped
+      @stripped ||= @body.sub(/#{PREFIXES.join("|")}/, "").sub(MARK, "").strip
     end
   end
 end

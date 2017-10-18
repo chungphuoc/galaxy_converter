@@ -1,6 +1,11 @@
 require "helper"
 
 describe GalaxyConverter::Metal do
+  it "must compute value of nil" do
+    metal = GalaxyConverter::Metal.new(nil)
+    metal.credits.must_equal 0
+  end
+
   it "must fetch value of Silver" do
     metal = GalaxyConverter::Metal.new("Silver")
     metal.credits.must_equal 17

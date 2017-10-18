@@ -1,17 +1,17 @@
 module GalaxyConverter
   class Metal
-    METAL_VALUES = {
+    VALUES = {
       "silver" => 17,
       "iron" => 195.5, 
       "gold" => 14450
     }
 
     def initialize(name)
-      @name = name.downcase
+      @name = name.to_s.downcase
     end
 
     def credits
-      METAL_VALUES.fetch(@name, 0)
+      VALUES.fetch(@name, 0)
     end
 
     def to_s
