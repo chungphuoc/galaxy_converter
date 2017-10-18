@@ -1,17 +1,14 @@
-require "forwardable"
 require "galaxy_converter/calculator"
 require "galaxy_converter/question"
 
 module GalaxyConverter
   class Answer
-    extend Forwardable
-
     UNKNOWN = "I have no idea what you are talking about"
-
-    def_delegators :@question, :units, :metal
 
     def initialize(question, calculator = Calculator)
       @question = question
+      @units = question.units
+      @metal = question.metal
       @calculator = calculator
     end
 
@@ -21,15 +18,15 @@ module GalaxyConverter
     end
 
     private def compute
-      "%g" % @calculator.new(units, metal).call
+      "%g" % @calculator.new(@units, @metal).call
     end
 
     private def stuff
-      "#{units} #{metal.to_s.capitalize}".strip
+      "#{@units} #{@metal.to_s.capitalize}".strip
     end
 
     private def value
-      return "is #{compute}" unless metal
+      return "is #{compute}" unless @metal
       "is #{compute} Credits"
     end
   end
