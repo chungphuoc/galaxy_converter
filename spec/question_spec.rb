@@ -25,6 +25,12 @@ describe GalaxyConverter::Question do
     question.mark?.must_equal false
   end
 
+  it "must exit early for empty string" do
+    question = GalaxyConverter::Question.new("")
+    question.units.must_be_nil
+    question.metal.must_be_nil
+  end
+
   it "must extract units" do
     question = GalaxyConverter::Question.new("How much is pish tegj glob glob trish ?")
     question.units.must_equal "pish tegj glob glob trish"

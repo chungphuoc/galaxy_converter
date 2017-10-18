@@ -22,6 +22,7 @@ module GalaxyConverter
     end
 
     def units
+      return if stripped.empty?
       return stripped if @body.start_with?(PREFIXES.first)
       tokens.first(tokens.size - 1).join(" ")
     end
@@ -32,7 +33,7 @@ module GalaxyConverter
     end
 
     private def stripped
-      @body.sub(/#{PREFIXES.join("|")}/, "").sub(MARK, "").strip
+      @stripped ||= @body.sub(/#{PREFIXES.join("|")}/, "").sub(MARK, "").strip
     end
 
     private def tokens
