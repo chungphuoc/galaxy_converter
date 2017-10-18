@@ -100,3 +100,8 @@ galaxy_converter ~/questions.txt
 ## Tests
 All the classes/modules of this gem are covered by (fast) unit testing.  
 Decoupling from collaborators has been relaxed, since stubbing plain value objects and mocking simple arithmetics is pointless.  
+
+Once you've unpackaged the gem, you can move to its insallation directory and run tests by:
+```shell
+bundle exec rake
+```
