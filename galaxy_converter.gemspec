@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.homepage = "https://bitbucket.org/costajob/galaxy_converter"
   s.license = "MIT"
   s.summary = "Arabic numerals to galaxy units converter, aimed to help on intergalactic transactions."
-  s.files = %w(README.md Rakefile galaxy_converter.gemspec Gemfile Gemfile.lock bin/galaxy_converter) + Dir["{spec,lib}/**/*.{rb,RB}"]
+  s.files = %w(README.md Rakefile galaxy_converter.gemspec Gemfile Gemfile.lock bin/galaxy_converter) + Dir["{spec,lib}/**/*.rb"]
   s.bindir = "bin"
   s.executables << "galaxy_converter"
   s.require_paths = ["lib"]
