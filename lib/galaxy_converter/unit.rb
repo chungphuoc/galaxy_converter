@@ -18,5 +18,9 @@ module GalaxyConverter
     def to_i
       SYMBOLS.fetch(@name, 0)
     end
+
+    def +(unit)
+      to_i + unit.to_i
+    end
   end
 end

@@ -26,7 +26,7 @@ It is also more compliant to the `ruby-way` of coding.
 # Installation
 Once you've got the gem, just move to the download folder and install it locally by:
 ```shell
-gem install --local ./galaxy_converter-1.2.2.gem
+gem install --local ./galaxy_converter-1.2.3.gem
 ```
 
 # Usage
@@ -101,7 +101,8 @@ galaxy_converter ~/questions.txt
 All the classes/modules of this gem are covered by (fast) unit testing.  
 Decoupling from collaborators has been relaxed, since stubbing plain value objects and mocking simple arithmetics is pointless.  
 
-Once you've unpackaged the gem, you can move to its insallation directory and run tests by:
+To run the tests you first need to unpack the gem:
 ```shell
+gem unpack ./galaxy_converter-1.2.3.gem
 bundle exec rake
 ```

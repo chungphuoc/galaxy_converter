@@ -4,9 +4,8 @@ require "galaxy_converter/unit"
 module GalaxyConverter
   class Calculator
     def initialize(units, value = nil, rule = Rule)
-      @units = units
+      @units = rule.call(units) 
       @value = value
-      @rule = rule
     end
 
     def call
@@ -15,13 +14,7 @@ module GalaxyConverter
     end
 
     private def total
-      Unit.bulk(additive).reduce(0) do |total, unit|
-        total += unit.to_i
-      end
-    end
-
-    private def additive
-      @rule.call(@units) 
+      Unit.bulk(@units).sum(&:to_i)
     end
   end
 end

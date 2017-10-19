@@ -1,6 +1,6 @@
 module GalaxyConverter
   class Question
-    PREFIXES = ["how much is ", "how many credits is "]
+    PREFIXES = ["how much is", "how many credits is"]
     MARK = "?"
 
     def self.bulk(questions)

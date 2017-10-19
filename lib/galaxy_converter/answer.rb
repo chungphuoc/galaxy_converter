@@ -15,7 +15,7 @@ module GalaxyConverter
     def to_s
       return "" unless @question.mark?
       return UNKNOWN unless @question.valid?
-      "#{stuff} #{value}"
+      "#{stuff} #{total}"
     end
 
     private def compute
@@ -26,7 +26,7 @@ module GalaxyConverter
       "#{@units} #{@value}".strip
     end
 
-    private def value
+    private def total
       return "is #{compute}" if @value.nil?
       "is #{compute} Credits"
     end
