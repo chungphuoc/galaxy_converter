@@ -16,14 +16,4 @@ describe GalaxyConverter::Unit do
   it "must discard invalid names" do
     GalaxyConverter::Unit.new("doh!").to_i.must_equal 0
   end
-
-  it "must support addition" do
-    unit = GalaxyConverter::Unit.new("pish")
-    (unit + 5).must_equal 15
-  end
-
-  it "must relax on invalid operand" do
-    unit = GalaxyConverter::Unit.new("pish")
-    (unit + "doh!").must_equal 10
-  end
 end
