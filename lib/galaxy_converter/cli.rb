@@ -1,18 +1,26 @@
-require "galaxy_converter/answer"
-require "galaxy_converter/question"
+require "galaxy_converter/responder"
 
 module GalaxyConverter
   class CLI
     HELP_FLAGS = %w[-h --help]
     COL_WIDTH = 23
 
-    def initialize(input, io = STDOUT)
+    def initialize(input, pipe = STDOUT, responder = Responder)
       @input = input
-      @io = io
+      @pipe = pipe
+      @responder = responder
     end
 
     def call
-      @io.puts output
+      @pipe.puts output
+    end
+
+    private def output
+      return help if help?
+      return unless file?
+      data = File.readlines(@input).map(&:strip)
+      notes = Note.bulk(data)
+      @responder.new(notes).call
     end
 
     private def file?
@@ -27,20 +35,8 @@ module GalaxyConverter
       [].tap do |h|
         h << %q{Usage: galaxy_converter <input>}
         h << "    %-#{COL_WIDTH}s Print this help" % "-h --help"
-        h << "    %-#{COL_WIDTH}s Answer the question" % %q{"how much is pish?"}
-        h << "    %-#{COL_WIDTH}s Load questions file" % "~/questions.txt"
+        h << "    %-#{COL_WIDTH}s Load conversion notes" % "~/notes.txt"
       end
-    end
-
-    private def questions
-      return [Question.new(@input)] unless file?
-      data = File.readlines(@input).map(&:strip)
-      Question::bulk(data)
-    end
-
-    private def output
-      return help if help?
-      questions.map { |question| Answer.new(question).to_s }.reject(&:empty?)
     end
   end
 end
