@@ -9,7 +9,9 @@ module GalaxyConverter
 
     def call(units)
       converted = convert(units)
-      @converter.to_i(converted)
+      result = @converter.new(converted)
+      return 0 unless result.valid?
+      result.to_i
     end
 
     private def convert(units)

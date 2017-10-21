@@ -20,7 +20,9 @@ module GalaxyConverter
         next acc unless matching
         name, credits = matching.captures 
         units = note.body.sub(stripped, "").strip
-        acc[name] = credits.to_f / @abacus.call(units)
+        value = @abacus.call(units)
+        next acc if value.zero?
+        acc[name] = credits.to_f / value
         acc
       end
     end

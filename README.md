@@ -17,14 +17,10 @@ In particular some value objects are used for the `Metal` and the `Unit` entitie
 The design behind the `Roman numerals` logic was inspired by Sandi Metz's [solution](https://www.sandimetz.com/blog/2016/6/9/make-everything-the-same): in the beginning roman numerals can be expressed both with `subtractive` (eg `IV`) and `additive` (eg `IIII`) form. 
 Switching to the additive form makes easier to convert to Arabic numerals.  
 
-## Invalid inputs
-Invalid inputs are gracefully managed by assigning `zero` value to unknown unit/metal.  
-This will have no impacts on final output and allows avoiding heavyweight exceptions handling.  
-
 # Installation
 Once you've got the gem, just move to the download folder and install it locally by:
 ```shell
-gem install --local ./galaxy_converter-2.0.1.gem
+gem install --local ./galaxy_converter-2.1.0.gem
 ```
 
 # Usage
@@ -91,6 +87,6 @@ Decoupling from collaborators has been relaxed, since stubbing plain value objec
 
 To run the tests you first need to unpack the gem:
 ```shell
-gem unpack ./galaxy_converter-2.0.1.gem
+gem unpack ./galaxy_converter-2.1.0.gem
 bundle exec rake
 ```
