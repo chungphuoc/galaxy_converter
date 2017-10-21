@@ -2,7 +2,7 @@ module GalaxyConverter
   module Roman
     class Constraint
       def initialize(roman)
-        @roman = roman.to_s.upcase
+        @roman = roman
       end
 
       def violated?

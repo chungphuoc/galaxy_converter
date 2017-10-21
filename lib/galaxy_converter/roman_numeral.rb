@@ -25,7 +25,7 @@ module GalaxyConverter
       end
 
       def initialize(value, constraint = Constraint)
-        @value = value
+        @value = value.to_s.upcase
         @constraint = constraint
       end
 
