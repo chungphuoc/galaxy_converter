@@ -1,3 +1,4 @@
+require "galaxy_converter/note"
 require "galaxy_converter/responder"
 
 module GalaxyConverter
@@ -5,10 +6,14 @@ module GalaxyConverter
     HELP_FLAGS = %w[-h --help]
     COL_WIDTH = 23
 
-    def initialize(input, pipe = STDOUT, responder = Responder)
+    def initialize(input, 
+                   pipe = STDOUT, 
+                   responder = Responder,
+                   note = Note)
       @input = input
       @pipe = pipe
       @responder = responder
+      @note = note
     end
 
     def call
@@ -19,7 +24,7 @@ module GalaxyConverter
       return help if help?
       return unless file?
       data = File.readlines(@input).map(&:strip)
-      notes = Note.bulk(data)
+      notes = @note.bulk(data)
       @responder.new(notes).call
     end
 
@@ -33,9 +38,9 @@ module GalaxyConverter
 
     private def help
       [].tap do |h|
-        h << %q{Usage: galaxy_converter <input>}
+        h << %q{Usage: galaxy_converter ~/notes.txt}
         h << "    %-#{COL_WIDTH}s Print this help" % "-h --help"
-        h << "    %-#{COL_WIDTH}s Load conversion notes" % "~/notes.txt"
+        h << "    %-#{COL_WIDTH}s Load conversion notes" % "<path-to-file>"
       end
     end
   end

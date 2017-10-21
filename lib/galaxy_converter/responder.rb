@@ -10,15 +10,14 @@ module GalaxyConverter
     UNKNOWN_ANSWER = "I have no idea what you are talking about"
 
     def initialize(notes, recognizer = Recognizer, abacus = Abacus)
-      @notes = notes
-      @recognizer = recognizer.new(@notes, abacus)
+      @questions = notes.select(&:question?)
+      @recognizer = recognizer.new(notes, abacus)
     end
 
     def call
-      @notes.reduce([]) do |acc, note|
-        next acc unless note.question?
+      @questions.reduce([]) do |acc, note|
         units, metal = detect(note)
-        total = value(units, metal)
+        total = total(units, metal)
         acc << to_s(units, metal, total, note.commercial?)
         acc
       end
@@ -35,10 +34,8 @@ module GalaxyConverter
       end.reject(&:empty?).join(" ")
     end
 
-    private def value(units, metal)
-      units_value = abacus.call(units)
-      metal_value = metals.fetch(metal, 1)
-      units_value * metal_value
+    private def total(units, metal)
+      abacus.call(units) * metals.fetch(metal, 1)
     end
 
     private def detect(note)

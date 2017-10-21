@@ -16,20 +16,33 @@ In particular some value objects are used for the `Metal` and the `Unit` entitie
 ## Roman numerals
 The design behind the `Roman numerals` logic was inspired by Sandi Metz's [solution](https://www.sandimetz.com/blog/2016/6/9/make-everything-the-same): in the beginning roman numerals can be expressed both with `subtractive` (eg `IV`) and `additive` (eg `IIII`) form. 
 Switching to the additive form makes easier to convert to Arabic numerals.  
-I just arranged the logic to work nicely with intergalactic use cases.
 
 ## Invalid inputs
 Invalid inputs are gracefully managed by assigning `zero` value to unknown unit/metal.  
 This will have no impacts on final output and allows avoiding heavyweight exceptions handling.  
-It is also more compliant to the `ruby-way` of coding.
 
 # Installation
 Once you've got the gem, just move to the download folder and install it locally by:
 ```shell
-gem install --local ./galaxy_converter-1.2.3.gem
+gem install --local ./galaxy_converter-2.0.1.gem
 ```
 
 # Usage
+
+## Library
+Just include the library into your program and pass an array of notes to the `Responder` object:
+```ruby
+require "galaxy_converter"
+
+notes = ["glob is I", "prok is V", "pish is X", "tegj is L", "glob glob Silver is 34 Credits", "glob prok Gold is 57800 Credits", "pish pish Iron is 3910 Credits", "how much is pish tegj glob glob ?", "how many Credits is glob prok Silver ?", "how many Credits is glob prok Gold ?", "how many Credits is glob prok Iron ?", "how much wood could a woodchuck chuck if a woodchuck could chuck wood ? "]
+
+puts GalaxyConverter.call(notes)
+# pish tegj glob glob is 42
+# glob prok Silver is 68 Credits
+# glob prok Gold is 57800 Credits
+# glob prok Iron is 782 Credits
+# I have no idea what you are talking about
+```
 
 ## CLI
 The gem provides a CLI interface. 
@@ -39,40 +52,15 @@ Once installed you will be able to use the `galaxy_converter` command from the t
 You can print CLI help by:
 ```shell
 galaxy_converter -h
-Usage: galaxy_converter <input>
+Usage: galaxy_converter ~/notes.txt
     -h --help               Print this help
-    "how much is pish?"     Answer the question
-    ~/questions.txt         Load questions file
+    <path-to-file>          Load conversion notes
 ```
 
 ### Possible inputs
-Just pass your question as the unique argument (others will be discarded), wrapping it within double quotes:
-```shell
-galaxy_converter "how many Credits is glob prok Iron ?"
-> glob prok Iron is 782 Credits
-```
-
-The same API works for plain units too:
-```shell
-galaxy_converter "how much is pish tegj glob glob ?"
-> pish tegj glob glob is 42
-```
-
-And manage unknown answer as well:
-```shell
-galaxy_converter "how much wood could a woodchuck chuck if a woodchuck could chuck wood ?"
-> I have no idea what you are talking about
-```
-
-There is no answer if no question is posted:
-```shell
-galaxy_converter "glob is I"
->
-```
-
-In case you have sketched your questions on a file like this:
+The program accepts as an input a file containing conversion notes:
 ```txt
-# ~/questions.txt
+# ~/notes.txt
 glob is I
 prok is V
 pish is X
@@ -87,9 +75,9 @@ how many Credits is glob prok Iron ?
 how much wood could a woodchuck chuck if a woodchuck could chuck wood ?
 ```
 
-You can use it by simply specifying its path:
+Just pass the file path to the program:
 ```shell
-galaxy_converter ~/questions.txt
+galaxy_converter ~/notes.txt
 > pish tegj glob glob is 42
 > glob prok Silver is 68 Credits
 > glob prok Gold is 57800 Credits
@@ -103,6 +91,6 @@ Decoupling from collaborators has been relaxed, since stubbing plain value objec
 
 To run the tests you first need to unpack the gem:
 ```shell
-gem unpack ./galaxy_converter-1.2.3.gem
+gem unpack ./galaxy_converter-2.0.1.gem
 bundle exec rake
 ```

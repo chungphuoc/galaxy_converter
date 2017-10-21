@@ -6,7 +6,7 @@ describe GalaxyConverter::CLI do
   it "must print help" do
     cli = GalaxyConverter::CLI.new("-h", output)
     cli.call
-    output.string.must_equal "Usage: galaxy_converter <input>\n    -h --help               Print this help\n    ~/notes.txt             Load conversion notes\n"
+    output.string.must_equal "Usage: galaxy_converter ~/notes.txt\n    -h --help               Print this help\n    <path-to-file>          Load conversion notes\n"
   end
 
   it "must print answers" do

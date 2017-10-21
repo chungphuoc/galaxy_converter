@@ -2,7 +2,7 @@ require "galaxy_converter/roman_numeral"
 
 module GalaxyConverter
   class Abacus
-    def initialize( mapping = {}, converter = Roman::Numeral)
+    def initialize(mapping = {}, converter = Roman::Numeral)
       @mapping = mapping
       @converter = converter
     end

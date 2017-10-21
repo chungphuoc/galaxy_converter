@@ -3,32 +3,35 @@ require "galaxy_converter/note"
 
 module GalaxyConverter
   class Recognizer
+    MATCHING_RULE = /(\w+) is (\w+)/
+
     attr_reader :abacus
 
-    def initialize(notes, 
-                   abacus = Abacus,
-                   symbols = Roman::Numeral::SYMBOLS.keys)
-      @assertions = notes.reject(&:question?)
-      @symbols = symbols.map(&:downcase)
+    def initialize(notes, abacus = Abacus)
+      notes = notes.reject(&:question?)
+      @commercials, @assertions = notes.partition(&:commercial?)
       @abacus = abacus.new(mapping)
     end
 
     def metals
-      @metals ||= @assertions.select(&:commercial?).reduce({}) do |acc, note|
-        stripped = note.body.gsub(/#{mapping.keys.join("|")}/, "").strip
-        matching = stripped.match(/(\w+) is (\d+) credits/)
+      @metals ||= @commercials.reduce({}) do |acc, note|
+        stripped = strip_units(note)
+        matching = stripped.match(MATCHING_RULE)
         next acc unless matching
-        units = note.body.split(stripped).first.strip
-        units_value = @abacus.call(units)
         name, credits = matching.captures 
-        acc[name] = credits.to_f / units_value
+        units = note.body.sub(stripped, "").strip
+        acc[name] = credits.to_f / @abacus.call(units)
         acc
       end
     end
 
+    private def strip_units(note)
+      note.body.gsub(/#{mapping.keys.join("|")}/, "").strip
+    end
+
     private def mapping
       @mapping ||= @assertions.reduce({}) do |acc, note|
-        matching = note.body.match(/(\w+) is (#{@symbols.join("|")})/)
+        matching = note.body.match(MATCHING_RULE)
         next acc unless matching
         unit, roman = matching.captures
         acc[unit.strip] = roman.upcase

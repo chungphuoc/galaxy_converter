@@ -10,4 +10,8 @@ describe GalaxyConverter::Abacus do
   it "must fetch value of 59" do
     abacus.call("tegj glob pish").must_equal 59
   end
+
+  it "must fetch value of 76" do
+    abacus.call("tegj pish pish prok glob").must_equal 76
+  end
 end
