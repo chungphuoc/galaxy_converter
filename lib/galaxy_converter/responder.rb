@@ -35,7 +35,8 @@ module GalaxyConverter
     end
 
     private def total(units, metal)
-      abacus.call(units) * metals.fetch(metal, 1)
+      return abacus.call(units) unless metal
+      abacus.call(units) * metals.fetch(metal, 0)
     end
 
     private def detect(note)

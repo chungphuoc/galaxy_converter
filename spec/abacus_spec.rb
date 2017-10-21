@@ -18,4 +18,8 @@ describe GalaxyConverter::Abacus do
   it "must return 0 for invalid sequence" do
     abacus.call("prok prok").must_equal 0
   end
+
+  it "must return 0 for invalid mapping" do
+    abacus.call("gork prok").must_equal 0
+  end
 end

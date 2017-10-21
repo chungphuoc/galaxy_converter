@@ -2,9 +2,10 @@ require "helper"
 
 describe GalaxyConverter::Recognizer do
   let(:notes) { GalaxyConverter::Note.bulk(Stubs::NOTES) }
-  let(:recognizer) { GalaxyConverter::Recognizer.new(notes) }
+  let(:wrong_notes) { GalaxyConverter::Note.bulk(Stubs::WRONG_NOTES) }
 
   it "must detect metals values" do
-    recognizer.metals.must_equal({"silver"=>17.0, "gold"=>14450.0, "iron"=>195.5})
+    GalaxyConverter::Recognizer.new(notes).metals.must_equal({"silver"=>17.0, "gold"=>14450.0, "iron"=>195.5})
+    GalaxyConverter::Recognizer.new(wrong_notes).metals.must_equal({"rodium"=>100.0})
   end
 end

@@ -16,7 +16,8 @@ module GalaxyConverter
 
     private def convert(units)
       units.split(" ").reduce("") do |to_convert, unit|
-        to_convert << @mapping[unit].to_s
+        return "" unless @mapping[unit]
+        to_convert << @mapping[unit]
       end
     end
   end
