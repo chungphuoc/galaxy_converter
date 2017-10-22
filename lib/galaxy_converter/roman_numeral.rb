@@ -24,8 +24,8 @@ module GalaxyConverter
       end
 
       def to_i
-        Rule.new(@value).to_additive.chars.sum do |symbol|
-          SYMBOLS.fetch(symbol, 0)
+        Rule.new(@value).to_additive.chars.reduce(0) do |total, symbol|
+          total += SYMBOLS.fetch(symbol, 0)
         end
       end
 

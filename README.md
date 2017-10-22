@@ -20,7 +20,7 @@ Switching to the additive form makes easier to convert to Arabic numerals.
 # Installation
 Once you've got the gem, just move to the download folder and install it locally by:
 ```shell
-gem install --local ./galaxy_converter-2.1.0.gem
+gem install --local ./galaxy_converter-2.1.1.gem
 ```
 
 # Usage
@@ -87,6 +87,6 @@ Decoupling from collaborators has been relaxed, since stubbing plain value objec
 
 Unpack the gem before running tests:
 ```shell
-gem unpack ./galaxy_converter-2.1.0.gem
+gem unpack ./galaxy_converter-2.1.1.gem
 bundle exec rake
 ```
