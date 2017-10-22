@@ -14,9 +14,10 @@ module GalaxyConverter
         "I" => 1
       }
 
-      def initialize(value, constraint = Constraint)
+      def initialize(value, constraint = Constraint, rule = Rule)
         @value = value.to_s.upcase
-        @constraint = constraint
+        @constraint = constraint.new(@value)
+        @rule = rule.new(@value)
       end
 
       def to_s
@@ -24,14 +25,14 @@ module GalaxyConverter
       end
 
       def to_i
-        Rule.new(@value).to_additive.chars.reduce(0) do |total, symbol|
+        @rule.to_additive.chars.reduce(0) do |total, symbol|
           total += SYMBOLS.fetch(symbol, 0)
         end
       end
 
       def valid?
         return false if @value.empty?
-        !@constraint.new(@value).violated?
+        !@constraint.violated?
       end
     end
   end
