@@ -14,16 +14,6 @@ module GalaxyConverter
         "I" => 1
       }
 
-      def self.to_roman(number)
-       roman = ""
-       SYMBOLS.reduce(number) do |to_convert, (symbol, arabic)|
-         repetitions, remainder = to_convert.divmod(arabic)
-         roman << symbol * repetitions
-         remainder
-       end
-       new(Rule.new(roman).to_subtractive)
-      end
-
       def initialize(value, constraint = Constraint)
         @value = value.to_s.upcase
         @constraint = constraint
@@ -40,6 +30,7 @@ module GalaxyConverter
       end
 
       def valid?
+        return false if @value.empty?
         !@constraint.new(@value).violated?
       end
     end

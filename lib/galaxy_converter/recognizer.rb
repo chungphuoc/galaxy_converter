@@ -13,8 +13,8 @@ module GalaxyConverter
       @abacus = abacus.new(mapping)
     end
 
-    def metals
-      @metals ||= @commercials.reduce({}) do |acc, note|
+    def goods
+      @goods ||= @commercials.reduce({}) do |acc, note|
         stripped = strip_units(note)
         matching = stripped.match(MATCHING_RULE)
         next acc unless matching

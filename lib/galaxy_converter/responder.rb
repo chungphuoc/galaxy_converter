@@ -5,7 +5,7 @@ module GalaxyConverter
   class Responder
     extend Forwardable
 
-    def_delegators :@recognizer, :metals, :abacus
+    def_delegators :@recognizer, :goods, :abacus
 
     UNKNOWN_ANSWER = "I have no idea what you are talking about"
 
@@ -16,34 +16,34 @@ module GalaxyConverter
 
     def call
       @questions.reduce([]) do |acc, note|
-        units, metal = detect(note)
-        total = total(units, metal)
-        acc << to_s(units, metal, total, note.commercial?)
+        units, good = detect(note)
+        total = total(units, good)
+        acc << to_s(units, good, total, note.commercial?)
         acc
       end
     end 
 
-    private def to_s(units, metal, total, commercial)
+    private def to_s(units, good, total, commercial)
       return UNKNOWN_ANSWER if total.zero?
       [].tap do |s|
         s << units
-        s << metal.to_s.capitalize
+        s << good.to_s.capitalize
         s << "is"
         s << "%g" % total
         s << "Credits" if commercial
       end.reject(&:empty?).join(" ")
     end
 
-    private def total(units, metal)
-      return abacus.call(units) unless metal
-      abacus.call(units) * metals.fetch(metal, 0)
+    private def total(units, good)
+      return abacus.call(units) unless good
+      abacus.call(units) * goods.fetch(good, 0)
     end
 
     private def detect(note)
       tokens = note.stripped.split
       return [tokens.join(" "), nil] unless note.commercial?
-      metal = tokens.pop
-      [tokens.join(" "), metal]
+      good = tokens.pop
+      [tokens.join(" "), good]
     end
   end
 end
