@@ -26,7 +26,7 @@ gem install --local ./galaxy_converter-2.1.0.gem
 # Usage
 
 ## Library
-Just include the library into your program and pass an array of notes to the `Responder` object:
+Just require the library into your program and pass an array of notes to the converter:
 ```ruby
 require "galaxy_converter"
 
@@ -53,8 +53,8 @@ Usage: galaxy_converter ~/notes.txt
     <path-to-file>          Load conversion notes
 ```
 
-### Possible inputs
-The program accepts as an input a file containing conversion notes:
+### Input
+The program accepts as input a file containing several conversion notes:
 ```txt
 # ~/notes.txt
 glob is I
@@ -85,7 +85,7 @@ galaxy_converter ~/notes.txt
 All the classes/modules of this gem are covered by (fast) unit testing.  
 Decoupling from collaborators has been relaxed, since stubbing plain value objects and mocking simple arithmetics is pointless.  
 
-To run the tests you first need to unpack the gem:
+Unpack the gem before running tests:
 ```shell
 gem unpack ./galaxy_converter-2.1.0.gem
 bundle exec rake
