@@ -3,8 +3,6 @@ require "galaxy_converter/note"
 
 module GalaxyConverter
   class Recognizer
-    MATCHING_RULE = /(\w+) is (\w+)/
-
     attr_reader :abacus
 
     def initialize(notes, abacus = Abacus)
@@ -15,11 +13,9 @@ module GalaxyConverter
 
     def goods
       @goods ||= @commercials.reduce({}) do |acc, note|
-        stripped = strip_units(note)
-        matching = stripped.match(MATCHING_RULE)
+        matching = note.body.match(goods_rule)
         next acc unless matching
-        name, credits = matching.captures 
-        units = note.body.sub(stripped, "").strip
+        units, name, credits = matching.captures 
         value = @abacus.call(units)
         next acc if value.zero?
         acc[name] = credits.to_f / value
@@ -27,18 +23,22 @@ module GalaxyConverter
       end
     end
 
-    private def strip_units(note)
-      note.body.gsub(/#{mapping.keys.join("|")}/, "").strip
+    private def goods_rule
+      /([#{mapping.keys.join("|")}\s]+) (\w+) is (\d+)/
     end
 
     private def mapping
       @mapping ||= @assertions.reduce({}) do |acc, note|
-        matching = note.body.match(MATCHING_RULE)
+        matching = note.body.match(mapping_rule)
         next acc unless matching
         unit, roman = matching.captures
         acc[unit.strip] = roman.upcase
         acc
       end
+    end
+
+    private def mapping_rule
+      /(\w+) is (\w)/
     end
   end
 end

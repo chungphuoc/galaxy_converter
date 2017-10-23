@@ -1,6 +1,8 @@
 module GalaxyConverter
   module Roman
-    class Rule
+    module Rule
+      extend self
+
       LONG_TO_SHORT = {
         "DCCCC" => "CM", # 900
         "CCCC"  => "CD", # 400
@@ -10,21 +12,9 @@ module GalaxyConverter
         "IIII"  => "IV"  # 4
       }
 
-      def initialize(value)
-        @value = value
-      end
-
-      def to_additive
-        convert(LONG_TO_SHORT.invert)
-      end
-
-      def to_subtractive
-        convert(LONG_TO_SHORT)
-      end
-
-      private def convert(map)
-        map.reduce(@value) do |to_convert, (form_1, form_2)|
-          to_convert.gsub(form_1, form_2)
+      def call(value)
+        LONG_TO_SHORT.reduce(value) do |to_convert, (long, short)|
+          to_convert.gsub(short, long)
         end
       end
     end

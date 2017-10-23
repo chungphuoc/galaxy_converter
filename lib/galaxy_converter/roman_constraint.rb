@@ -1,36 +1,30 @@
 module GalaxyConverter
   module Roman
-    class Constraint
-      class << self
-        def violations
-          @violations ||= repetitions + subtractions
-        end
+    module Constraint
+      extend self
 
-        private def repetitions
-          %w[I X C M].map { |c| c * 4 } +
-            %w[D L V].map { |c| c * 2 }
-        end
-
-        private def subtractions
-          %w[V X].map { |c| "II#{c}"} +
-            %w[L C].map { |c| "XX#{c}"} +
-            %w[D M].map { |c| "CC#{c}"} +
-            %w[L C D M].map { |c| "I#{c}" } +
-            %w[D M].map { |c| "X#{c}" } +
-            %w[X L C D M].map { |c| "V#{c}" } + 
-            %w[C D M].map { |c| "L#{c}"} +
-            ["DM"]
-        end
+      def violated?(value)
+        violations.any? { |violation| value.index(violation) }
       end
 
-      def initialize(roman)
-        @roman = roman
+      private def violations
+        @violations ||= repetitions + subtractions
       end
 
-      def violated?
-        self.class.violations.any? do |constraint|
-          @roman.index(constraint)
-        end
+      private def repetitions
+        %w[I X C M].map { |c| c * 4 } +
+          %w[D L V].map { |c| c * 2 }
+      end
+
+      private def subtractions
+        %w[V X].map { |c| "II#{c}"} +
+          %w[L C].map { |c| "XX#{c}"} +
+          %w[D M].map { |c| "CC#{c}"} +
+          %w[L C D M].map { |c| "I#{c}" } +
+          %w[D M].map { |c| "X#{c}" } +
+          %w[X L C D M].map { |c| "V#{c}" } + 
+          %w[C D M].map { |c| "L#{c}"} +
+          ["DM"]
       end
     end
   end
