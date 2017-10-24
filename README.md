@@ -11,7 +11,6 @@ This gem is the Ruby implementation of the `Merchant's Guide to the Galaxy` code
 
 ## SRP
 The code design follows the single responsibility principle by using a dedicated class/module for any specific task.  
-In particular some value objects are used for the `Metal` and the `Unit` entities, allowing to deal with invalid names gracefully.  
 
 ## Roman numerals
 The design behind the `Roman numerals` logic was inspired by Sandi Metz's [solution](https://www.sandimetz.com/blog/2016/6/9/make-everything-the-same): in the beginning roman numerals can be expressed both with `subtractive` (eg `IV`) and `additive` (eg `IIII`) form. 
