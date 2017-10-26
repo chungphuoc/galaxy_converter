@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email = ["costajob@gmail.com"]
   s.homepage = "https://bitbucket.org/costajob/galaxy_converter"
   s.license = "MIT"
-  s.summary = "Arabic numerals to galaxy units converter, aimed to help on intergalactic transactions."
+  s.summary = "Implementation of the Merchant's Guide to the Galaxy kata"
   s.files = %w(README.md Rakefile galaxy_converter.gemspec Gemfile Gemfile.lock bin/galaxy_converter) + Dir["{spec,lib}/**/*.rb"]
   s.bindir = "bin"
   s.executables << "galaxy_converter"
