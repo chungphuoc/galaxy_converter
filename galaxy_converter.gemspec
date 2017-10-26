@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version = GalaxyConverter::VERSION
   s.authors = ["costajob"]
   s.email = ["costajob@gmail.com"]
-  s.homepage = "https://bitbucket.org/costajob/galaxy_converter"
+  s.homepage = "https://github.com/costajob/galaxy_converter"
   s.license = "MIT"
   s.summary = "Implementation of the Merchant's Guide to the Galaxy kata"
   s.files = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
