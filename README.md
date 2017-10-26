@@ -1,4 +1,4 @@
-# Table of Contents
+## Table of Contents
 * [Scope](#scope)
 * [Design](#design)
   * [SRP](#srp)
@@ -8,27 +8,27 @@
   * [Library](#library)
   * [CLI](#cli)
 
-# Scope
+## Scope
 This gem is the Ruby implementation of the `Merchant's Guide to the Galaxy` code-kata.
 
-# Design
+## Design
 
-## SRP
+### SRP
 The code design follows the single responsibility principle by using a dedicated class/module for any specific task.  
 
-## Roman numerals
+### Roman numerals
 The design behind the `Roman numerals` logic was inspired by Sandi Metz's [solution](https://www.sandimetz.com/blog/2016/6/9/make-everything-the-same): in the beginning roman numerals can be expressed both with `subtractive` (eg `IV`) and `additive` (eg `IIII`) form. 
 Switching to the additive form makes easier to convert to Arabic numerals.  
 
-# Installation
+## Installation
 Install the gem from your shell:
 ```shell
 gem install galaxy_converter
 ```
 
-# Usage
+## Usage
 
-## Library
+### Library
 Just require the library into your program and pass an array of notes to the converter:
 ```ruby
 require "galaxy_converter"
@@ -43,11 +43,11 @@ puts GalaxyConverter.call(notes)
 # I have no idea what you are talking about
 ```
 
-## CLI
+### CLI
 The gem provides a CLI interface. 
 Once installed you will be able to use the `galaxy_converter` command from the terminal.  
 
-### Help
+#### Help
 You can print CLI help by:
 ```shell
 galaxy_converter -h
@@ -56,7 +56,7 @@ Usage: galaxy_converter ~/notes.txt
     <path-to-file>          Load conversion notes
 ```
 
-### Input
+#### Input
 The program accepts as input a file containing several conversion notes:
 ```txt
 # ~/notes.txt
