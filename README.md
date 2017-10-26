@@ -1,8 +1,12 @@
 # Table of Contents
 * [Scope](#scope)
 * [Design](#design)
+  * [SRP](#srp)
+  * [Roman numerals](#roman-numerals)
 * [Installation](#installation)
 * [Usage](#usage)
+  * [Library](#library)
+  * [CLI](#cli)
 
 # Scope
 This gem is the Ruby implementation of the `Merchant's Guide to the Galaxy` code-kata.
@@ -17,9 +21,9 @@ The design behind the `Roman numerals` logic was inspired by Sandi Metz's [solut
 Switching to the additive form makes easier to convert to Arabic numerals.  
 
 # Installation
-Once you've got the gem, just move to the download folder and install it locally by:
+Install the gem from your shell:
 ```shell
-gem install --local ./galaxy_converter-2.1.1.gem
+gem install galaxy_converter
 ```
 
 # Usage
@@ -78,14 +82,4 @@ galaxy_converter ~/notes.txt
 > glob prok Gold is 57800 Credits
 > glob prok Iron is 782 Credits
 > I have no idea what you are talking about
-```
-
-## Tests
-All the classes/modules of this gem are covered by (fast) unit testing.  
-Decoupling from collaborators has been relaxed, since stubbing plain value objects and mocking simple arithmetics is pointless.  
-
-Unpack the gem before running tests:
-```shell
-gem unpack ./galaxy_converter-2.1.1.gem
-bundle exec rake
 ```
