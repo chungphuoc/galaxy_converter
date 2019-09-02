@@ -1,44 +1,39 @@
-require "galaxy_converter/abacus"
+require "galaxy_converter/converter"
 require "galaxy_converter/note"
 
 module GalaxyConverter
-  class Recognizer
-    attr_reader :abacus
+  class Detector
+    MAPPING_RULE = /(\w+) is (\w+)/
+    GOODS_RULE = /([\w+\s]+) (\w+) is (\d+) credits/i
 
-    def initialize(notes, abacus = Abacus)
+    attr_reader :converter
+
+    def initialize(notes, converter = Converter)
       notes = notes.reject(&:question?)
       @commercials, @assertions = notes.partition(&:commercial?)
-      @abacus = abacus.new(mapping)
+      @converter = converter.new(mapping)
     end
 
     def goods
       @goods ||= @commercials.reduce({}) do |acc, note|
-        matching = note.body.match(goods_rule)
+        matching = note.body.match(GOODS_RULE)
         next acc unless matching
         units, name, credits = matching.captures 
-        value = @abacus.call(units)
+        value = @converter.call(units)
         next acc if value.zero?
         acc[name] = credits.to_f / value
         acc
       end
     end
 
-    private def goods_rule
-      /([#{mapping.keys.join("|")}\s]+) (\w+) is (\d+)/
-    end
-
     private def mapping
       @mapping ||= @assertions.reduce({}) do |acc, note|
-        matching = note.body.match(mapping_rule)
+        matching = note.body.match(MAPPING_RULE)
         next acc unless matching
         unit, roman = matching.captures
         acc[unit.strip] = roman.upcase
         acc
       end
-    end
-
-    private def mapping_rule
-      /(\w+) is (\w)/
     end
   end
 end

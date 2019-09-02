@@ -1,49 +1,26 @@
 require "forwardable"
-require "galaxy_converter/recognizer"
+require "galaxy_converter/detector"
 
 module GalaxyConverter
   class Responder
     extend Forwardable
 
-    def_delegators :@recognizer, :goods, :abacus
+    def_delegators :@detector, :goods, :converter
 
-    UNKNOWN_ANSWER = "I have no idea what you are talking about"
-
-    def initialize(notes, recognizer = Recognizer, abacus = Abacus)
+    def initialize(notes, detector = Detector)
       @questions = notes.select(&:question?)
-      @recognizer = recognizer.new(notes, abacus)
+      @detector = detector.new(notes)
     end
 
     def call
       @questions.reduce([]) do |acc, note|
-        units, good = detect(note)
-        total = total(units, good)
-        acc << to_s(units, good, total, note.commercial?)
-        acc
+        total = total(note)
+        acc << note.answer(total)
       end
     end 
 
-    private def to_s(units, good, total, commercial)
-      return UNKNOWN_ANSWER if total.zero?
-      [].tap do |s|
-        s << units
-        s << good.to_s.capitalize
-        s << "is"
-        s << "%g" % total
-        s << "Credits" if commercial
-      end.reject(&:empty?).join(" ")
-    end
-
-    private def total(units, good)
-      return abacus.call(units) unless good
-      abacus.call(units) * goods.fetch(good, 0)
-    end
-
-    private def detect(note)
-      tokens = note.stripped.split
-      return [tokens.join(" "), nil] unless note.commercial?
-      good = tokens.pop
-      [tokens.join(" "), good]
+    private def total(note)
+      converter.call(note.units) * goods.fetch(note.good, 1)
     end
   end
 end

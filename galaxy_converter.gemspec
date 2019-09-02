@@ -16,10 +16,8 @@ Gem::Specification.new do |s|
   s.bindir = "bin"
   s.executables << "galaxy_converter"
   s.require_paths = ["lib"]
-  s.required_ruby_version = ">= 2.2.2"
-
-  s.add_development_dependency "bundler", "~> 1.15"
-  s.add_development_dependency "rake", "~> 10.0"
-  s.add_development_dependency "minitest", "~> 5.0"
-  s.add_development_dependency "benchmark-ips", "~> 2"
+  s.required_ruby_version = ">= 2.4.1"
+  s.add_development_dependency "bundler", "~> 2.0"
+  s.add_development_dependency "rake", "~> 12.3"
+  s.add_development_dependency "minitest", "~> 5.11"
 end
