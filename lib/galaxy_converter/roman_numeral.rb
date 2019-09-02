@@ -1,5 +1,4 @@
 require "galaxy_converter/constraint"
-require "galaxy_converter/stretcher"
 
 module GalaxyConverter
   class RomanNumeral
@@ -13,10 +12,18 @@ module GalaxyConverter
       "I" => 1
     }
 
-    def initialize(value, constraint = Constraint, stretcher = Stretcher)
+    STRETCH_MAP = {
+      "DCCCC" => "CM", # 900
+      "CCCC"  => "CD", # 400
+      "LXXXX" => "XC", # 90
+      "XXXX"  => "XL", # 40
+      "VIIII" => "IX", # 9
+      "IIII"  => "IV"  # 4
+    }
+
+    def initialize(value, constraint = Constraint)
       @value = value.to_s.upcase
       @constraint = constraint
-      @stretcher = stretcher
     end
 
     def to_s
@@ -25,7 +32,13 @@ module GalaxyConverter
 
     def to_i
       return 0 unless valid?
-      @stretcher.call(@value).chars.sum { |symbol| SYMBOLS.fetch(symbol, 0) }
+      stretched.chars.sum { |symbol| SYMBOLS.fetch(symbol, 0) }
+    end
+
+    private def stretched
+      @stretched ||= STRETCH_MAP.reduce(@value) do |value, (long, short)|
+        value.gsub(short, long)
+      end
     end
 
     private def valid?

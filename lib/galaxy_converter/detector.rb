@@ -10,12 +10,12 @@ module GalaxyConverter
 
     def initialize(notes, converter = Converter)
       notes = notes.reject(&:question?)
-      @commercials, @assertions = notes.partition(&:commercial?)
+      @credits, @assertions = notes.partition { |note| note.instance_of? Credit }
       @converter = converter.new(mapping)
     end
 
     def goods
-      @goods ||= @commercials.reduce({}) do |acc, note|
+      @goods ||= @credits.reduce({}) do |acc, note|
         matching = note.body.match(GOODS_RULE)
         next acc unless matching
         units, name, credits = matching.captures 
