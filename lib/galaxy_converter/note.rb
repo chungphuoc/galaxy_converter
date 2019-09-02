@@ -3,10 +3,11 @@ module GalaxyConverter
     PREFIXES = ["how much is", "how many credits is"]
     QUESTION = "?"
     NO_IDEA = "I have no idea what you are talking about"
+    CREDITS = "credits"
 
     def self.from(notes)
       Array(notes).map do |body| 
-        klass = body.index(/credits/i) ? Credit : Note
+        klass = body.index(/#{CREDITS}/i) ? Credit : Note
         klass.new(body)
       end
     end
@@ -43,8 +44,7 @@ module GalaxyConverter
 
   class Credit < Note
     def answer(total = 0)
-      s = super
-      s << " Credits"
+      super << " #{CREDITS.capitalize}"
     end
 
     private def detect
