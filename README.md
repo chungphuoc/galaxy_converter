@@ -5,7 +5,8 @@
   * [Roman numerals](#roman-numerals)
 * [Installation](#installation)
 * [Usage](#usage)
-  * [CLI](#cli)
+  * [Input](#input)
+  * [Output](#output)
 
 ## Scope
 This gem is the Ruby implementation of the `Merchant's Guide to the Galaxy` code-kata.
@@ -27,9 +28,8 @@ gem install galaxy_converter
 
 ## Usage
 
-### CLI
-The gem provides a CLI interface. 
-The program accepts as input a file containing several conversion notes:
+### Input
+The gem provides a CLI interface accepting as input a file containing several conversion notes:
 ```txt
 # ~/notes.txt
 glob is I
@@ -46,6 +46,7 @@ how many Credits is glob prok Iron ?
 how much wood could a woodchuck chuck if a woodchuck could chuck wood ?
 ```
 
+### Output
 Just pass the file path to the program:
 ```shell
 galaxy_converter ~/notes.txt
