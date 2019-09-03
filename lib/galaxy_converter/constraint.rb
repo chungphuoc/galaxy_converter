@@ -3,16 +3,11 @@ module GalaxyConverter
     extend self
 
     def call(value)
-      return if value.empty?
       violations.any? { |violation| value.index(violation) }
     end
 
     private def violations
-      @violations ||= repetitions + subtractions
-    end
-
-    private def repetitions
-      too_many_repetitions + unrepeatable
+      @violations ||= too_many_repetitions + unrepeatable + repeated_sub + wrong_sub
     end
 
     private def too_many_repetitions
@@ -21,10 +16,6 @@ module GalaxyConverter
 
     private def unrepeatable
       %w[D L V].map { |c| c * 2 }
-    end
-
-    private def subtractions
-      repeated_sub + wrong_sub
     end
 
     private def repeated_sub

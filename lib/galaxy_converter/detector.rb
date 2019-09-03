@@ -9,8 +9,7 @@ module GalaxyConverter
     attr_reader :converter
 
     def initialize(notes, converter = Converter)
-      notes = notes.reject(&:question?)
-      @credits, @assertions = notes.partition { |note| note.instance_of? Credit }
+      @credits, @assertions = notes.reject(&:question?).partition { |note| note.instance_of? Credit }
       @converter = converter.new(mapping)
     end
 
@@ -27,7 +26,7 @@ module GalaxyConverter
     end
 
     private def mapping
-      @mapping ||= @assertions.reduce({}) do |acc, note|
+      @assertions.reduce({}) do |acc, note|
         matching = note.body.match(MAPPING_RULE)
         next acc unless matching
         unit, roman = matching.captures

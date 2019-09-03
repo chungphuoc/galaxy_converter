@@ -2,7 +2,7 @@ require "helper"
 
 describe GalaxyConverter::Constraint do
   it "must detect empty value" do
-    GalaxyConverter::Constraint.call("").must_be_nil
+    GalaxyConverter::Constraint.call("").must_equal false
   end
 
   it "must detect too many repetition" do
